@@ -588,35 +588,53 @@ document.onkeydown = function(e) {
     right: 20px;
   }
 
-  @media (max-width: 600px) {
+@media (max-width: 600px) {
     header h1 {
       font-size: 2.5rem;
     }
 
     .menu-grid {
-      grid-template-columns:repeat(2,1fr);
-        gap:10px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      align-items: start;
     }
-      .card-img-box{
-          height:130px;
-      }
-      .card-content{
-          padding:10px;
-      }
-      .card-title{
-          font-size:0.85rem;
-      }
-      .card-desc{
-          font-size:0.72rem;
-      }
-      .price{
-          font-size:0.95rem;
-      }
-      .add-to-cart{
-          padding:7px 10px;
-          font-size:0.75rem;
-      }
+
+    .card {
+      height: 100%;
+    }
+
+    .card-content {
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-img-box {
+      height: 130px;
+    }
+
+    .card-title {
+      font-size: 0.85rem;
+    }
+
+    .card-desc {
+      font-size: 0.72rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .price {
+      font-size: 0.95rem;
+    }
+
+    .add-to-cart {
+      padding: 7px 10px;
+      font-size: 0.75rem;
+    }
   }
+ 
           
 .main-footer {
     background-color: #000000; 
