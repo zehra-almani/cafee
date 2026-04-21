@@ -1,0 +1,709 @@
+<div id="toast">Added to cart!</div>
+
+<header class="luxury-header">
+    <div class="header-content">
+        <h1 class="main-title">CAFE</h1>
+        <div class="separator">
+            <span class="line"></span>
+            <span class="symbol">☕</span>
+            <span class="line"></span>
+        </div>
+        <p class="sub-title">COFFEE-SHOP</p>
+    </div>
+</header>
+
+<div class="tabs-container">
+  <div class="tabs" id="category-tabs">
+  </div>
+</div>
+
+<div class="container">
+  <div class="menu-grid" id="menu-container">
+  </div>
+</div>
+
+<div id="cart-strip">
+  <div id="cart-info">0 Items | Rs. 0</div>
+  <button
+    style="background: #000; color: #fff; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer;">View
+    Order</button>
+</div>
+
+<script>
+
+
+
+  const MenuData = {
+    "HOT COFFEE": [
+      { id: "h1", name: " Americano", r: 420, l: 520, img: "one.webp", desc: "PURE BOLD AND REFRESHINGLY SIMPLE A SMOOTHPOUR OF ESPRESSO SOFTENDED WITH HOT WATER DELIVERING A CLEAN AND RICH COFFEE EXPERIENCE THAT LINGERS." },
+      { id: "h2", name: "DOPIO", r: 520, l: 710, img: "two.webp", desc: "Twice the shot, twice the character. A deep, intense espresso with a silky body and a strong kick that coffee lovers crave.." },
+      { id: "h3", name: "Cappuccino", r: 610, l: 710, img: "three.jpg", desc: "Equal parts espresso, steamed milk, and thick foam dusted with cocoa." },
+      { id: "h4", name: "latte", r: 680, l: 710, img: "four.webp", desc: "A timeless classic featuring our smooth signature espresso and silky steamed milk. Perfectly balanced and velvety, it’s the ultimate comfort in a cup for any time of day." },
+      { id: "h5", name: "caramel latte", r: 680, l: 780, img: "five.webp", desc: "Indulge in a rich fusion of bold espresso and buttery caramel sweetness. Topped with a smooth milk finish, it’s a decadent treat designed to satisfy your sweet cravings." },
+      { id: "h6", name: "french vanilla latte", r: 680, l: 780, img: "seven.webp", desc: "Elevate your coffee ritual with the elegant aroma of premium French vanilla. A sophisticated blend that offers a gentle sweetness and a creamy, luxurious mouthfeel in every sip." },
+      { id: "h7", name: "toasted latte", r: 680, l: 780, img: "nine.jpg", desc: "Experience the warm, smoky notes of perfectly roasted beans with a touch of caramelized flavor. This latte is designed for a cozy feel, offering a deep and earthy aroma in every velvety sip." },
+      { id: "h8", name: "tiramisu latte", r: 680, l: 780, img: "ten.webp", desc: "Inspired by the classic Italian dessert, this latte combines bold coffee with notes of cocoa and mascarpone. A dessert in a cup, crafted for those who love a sophisticated, cake-like finish." },
+      { id: "h9", name: "spanish latte", r: 680, l: 780, img: "eleven.jpg", desc: "A sweet and creamy delight that blends rich espresso with condensed milk. This traditional favorite offers a thick, velvety texture and a luxurious sweetness that lingers on the palate." },
+
+
+
+
+    ],
+    "COLD COFFEE": [
+      { id: "c1", name: "Iced Americano", r: 580, l: 1080, img: "https://via.placeholder.com/400x300?text=Iced+Latte", desc: "The purist’s choice for a hot day. Clean, crisp, and bold espresso shots diluted with chilled water and served over ice to highlight the true profile of our Arabic beans." },
+      { id: "c2", name: "Iced Latte", r: 680, l: 880, img: "https://via.placeholder.com/400x300?text=Pistachio+Latte", desc: "Simplicity at its finest. Chilled milk poured over rich, concentrated espresso and ice for a smooth, creamy, and naturally refreshing pick-me-up." },
+      { id: "c3", name: "Iced vanilla Latte", r: 780, l: 980, img: "https://via.placeholder.com/400x300?text=Pistachio+Latte", desc: "Elegant and effortlessly smooth. We use premium vanilla bean notes to complement our bold espresso, creating a light and floral chilled coffee that never goes out of style." },
+      { id: "c4", name: "Iced caramel Latte", r: 780, l: 980, img: "https://via.placeholder.com/400x300?text=Pistachio+Latte", desc: "Our fan-favorite chilled classic. Silky espresso meets buttery caramel syrup over ice, finished with a smooth milk swirl for a refreshingly sweet caffeine kick." },
+      { id: "c5", name: "Iced hazelnur Latte", r: 780, l: 980, img: "https://via.placeholder.com/400x300?text=Pistachio+Latte", desc: "Indulge in the nutty and aromatic notes of premium toasted hazelnuts. Combined with smooth espresso and chilled milk, this latte offers a refined, earthy sweetness." },
+      { id: "c6", name: "Pistachio Iced Latte", r: 780, l: 980, img: "https://via.placeholder.com/400x300?text=Pistachio+Latte", desc: "Creamy, nutty, and refreshing. Perfect for pistachio lovers." },
+      { id: "c7", name: "Iced salted caramel Latte", r: 780, l: 980, img: "https://via.placeholder.com/400x300?text=Pistachio+Latte", desc: "A sophisticated balance of sweet and savory. Our rich caramel sauce is enhanced with a pinch of sea salt and poured over ice, creating a multi-dimensional flavor in every sip." },
+      { id: "c8", name: "pumpink Iced Latte", r: 780, l: 980, img: "https://via.placeholder.com/400x300?text=Pistachio+Latte", desc: "The ultimate seasonal delight, blending the warm spices of pumpkin pie with our signature cold brew. A cozy yet refreshing fusion that brings the taste of autumn to your glass." },
+      { id: "c9", name: "Iced buttersotch Latte", r: 780, l: 980, img: "https://via.placeholder.com/400x300?text=Pistachio+Latte", desc: "A nostalgic treat featuring the buttery, brown-sugar sweetness of classic butterscotch. Perfectly swirled with chilled milk and bold espresso for a rich and golden coffee experience." },
+
+    ],
+    "THE MATCHA BAR": [
+      { id: "m1", name: "Strawberry Matcha", r: 1080, l: 1280, img: "https://via.placeholder.com/400x300?text=Matcha", desc: "Ceremonial grade matcha layered over fresh strawberry puree and milk." },
+      { id: "m2", name: "Strawberry Matcha", r: 1080, l: 1280, img: "https://via.placeholder.com/400x300?text=Matcha", desc: "Ceremonial grade matcha layered over fresh strawberry puree and milk." },
+      { id: "m3", name: "Strawberry Matcha", r: 1080, l: 1280, img: "https://via.placeholder.com/400x300?text=Matcha", desc: "Ceremonial grade matcha layered over fresh strawberry puree and milk." },
+      { id: "m4", name: "Strawberry Matcha", r: 1080, l: 1280, img: "https://via.placeholder.com/400x300?text=Matcha", desc: "Ceremonial grade matcha layered over fresh strawberry puree and milk." },
+      { id: "m5", name: "Strawberry Matcha", r: 1080, l: 1280, img: "https://via.placeholder.com/400x300?text=Matcha", desc: "Ceremonial grade matcha layered over fresh strawberry puree and milk." },
+      { id: "m6", name: "Strawberry Matcha", r: 1080, l: 1280, img: "https://via.placeholder.com/400x300?text=Matcha", desc: "Ceremonial grade matcha layered over fresh strawberry puree and milk." },
+      { id: "m7", name: "Strawberry Matcha", r: 1080, l: 1280, img: "https://via.placeholder.com/400x300?text=Matcha", desc: "Ceremonial grade matcha layered over fresh strawberry puree and milk." },
+
+    ],
+    "FRESH JUICES": [
+      { id: "j1", name: "mint leamond", r: 300, l: 500, img: "eight.jpg", desc: "refreshing blend of fresh mint,lemons mint,and crushed ice." },
+      { id: "c1", name: "Iced Americano", r: 580, l: 1080, img: "https://via.placeholder.com/400x300?text=Iced+Latte", desc: "The purist’s choice for a hot day. Clean, crisp, and bold espresso shots diluted with chilled water and served over ice to highlight the true profile of our Arabic beans." },
+      { id: "c1", name: "Iced Americano", r: 580, l: 1080, img: "https://via.placeholder.com/400x300?text=Iced+Latte", desc: "The purist’s choice for a hot day. Clean, crisp, and bold espresso shots diluted with chilled water and served over ice to highlight the true profile of our Arabic beans." },
+      { id: "c1", name: "Iced Americano", r: 580, l: 1080, img: "https://via.placeholder.com/400x300?text=Iced+Latte", desc: "The purist’s choice for a hot day. Clean, crisp, and bold espresso shots diluted with chilled water and served over ice to highlight the true profile of our Arabic beans." },
+      { id: "c1", name: "Iced Americano", r: 580, l: 1080, img: "https://via.placeholder.com/400x300?text=Iced+Latte", desc: "The purist’s choice for a hot day. Clean, crisp, and bold espresso shots diluted with chilled water and served over ice to highlight the true profile of our Arabic beans." },
+      { id: "c1", name: "Iced Americano", r: 580, l: 1080, img: "https://via.placeholder.com/400x300?text=Iced+Latte", desc: "The purist’s choice for a hot day. Clean, crisp, and bold espresso shots diluted with chilled water and served over ice to highlight the true profile of our Arabic beans." },
+
+    ],
+
+    "SLUSHES": [
+      { id: "k1", name: "mint leamond", r: 300, l: 500, img: "", desc: "refreshing blend of fresh mint,lemons mint,and crushed ice." },
+    ],
+
+    "MOJITO": [
+      { id: "n1", name: "mint leamond", r: 300, l: 500, img: "", desc: "refreshing blend of fresh mint,lemons mint,and crushed ice." },
+    ],
+    "BLEANDED  COFFEE FRAPPES": [
+      { id: "z1", name: "mint leamond", r: 300, l: 500, img: "", desc: "refreshing blend of fresh mint,lemons mint,and crushed ice." },
+    ],
+    "MOCKTAILS": [
+      { id: "A1", name: "mint leamond", r: 300, l: 500, img: "", desc: "refreshing blend of fresh mint,lemons mint,and crushed ice." },
+    ],
+    "COLORS & ICED TEAS": [
+      { id: "B1", name: "mint leamond", r: 300, l: 500, img: "", desc: "refreshing blend of fresh mint,lemons mint,and crushed ice." },
+    ],
+    "SHAKES": [
+      { id: "T1", name: "mint leamond", r: 300, l: 500, img: "", desc: "refreshing blend of fresh mint,lemons mint,and crushed ice." },
+    ],
+    "WATER LEMONADE": [
+      { id: "W1", name: "mint leamond", r: 300, l: 500, img: "", desc: "refreshing blend of fresh mint,lemons mint,and crushed ice." },
+    ],
+    "SMOOTHIES": [
+      { id: "Q1", name: "mint leamond", r: 300, l: 500, img: "", desc: "refreshing blend of fresh mint,lemons mint,and crushed ice." },
+    ],
+
+    "ICE-CREAM": [
+      { id: "D1", name: "", r: 300, l: 500, img: "", desc: "refreshing blend of fresh mint,lemons mint,and crushed ice." },
+    ],
+    "DESSERTS": [
+      { id: "S1", name: "chocolate", r: 300, l: 500, img: "", desc: "refreshing blend of fresh mint,lemons mint,and crushed ice." },
+    ],
+
+  };
+
+
+
+  let currentCategory = "Hot Coffee";
+  let cart = [];
+  let selections = {};
+
+
+  function init() {
+    renderTabs();
+    renderMenu("HOT COFFEE");
+  }
+
+  function renderTabs() {
+    const tabBox = document.getElementById('category-tabs');
+    Object.keys(MenuData).forEach((cat, index) => {
+      const btn = document.createElement('button');
+      btn.className = `tab-btn ${index === 0 ? 'active' : ''}`;
+      btn.innerText = cat;
+      btn.onclick = (e) => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+        renderMenu(cat);
+      };
+      tabBox.appendChild(btn);
+    });
+  }
+
+  function renderMenu(category) {
+    const container = document.getElementById('menu-container');
+    container.innerHTML = '';
+
+    MenuData[category].forEach(item => {
+      const defaultSize = item.r ? 'r' : 'l';
+      selections[item.id] = defaultSize;
+
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+                    <div class="card-img-box">
+                        <img src="${item.img}" alt="${item.name}">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">${item.name}</h3>
+                        <p class="card-desc">${item.desc}</p>
+                        
+                        <div class="size-selector">
+                            <button class="size-btn ${!item.r ? 'disabled' : (defaultSize === 'r' ? 'active' : '')}" 
+                                onclick="selectSize('${item.id}', 'r', ${item.r})" ${!item.r ? 'disabled' : ''}>Regular</button>
+                            <button class="size-btn ${!item.l ? 'disabled' : (defaultSize === 'l' ? 'active' : '')}" 
+                                onclick="selectSize('${item.id}', 'l', ${item.l})" ${!item.l ? 'disabled' : ''}>Large</button>
+                        </div>
+
+                        <div class="price-row">
+                            <div class="price" id="price-${item.id}">Rs. ${item[defaultSize]}</div>
+                            <button class="add-to-cart" onclick="addToCart('${item.id}', '${item.name}')">Add +</button>
+                        </div>
+                    </div>
+                `;
+      container.appendChild(card);
+    });
+  }
+
+  function selectSize(itemId, size, price) {
+    selections[itemId] = size;
+    const card = document.getElementById(`price-${itemId}`).closest('.card');
+    card.querySelectorAll('.size-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+    document.getElementById(`price-${itemId}`).innerText = `Rs. ${price}`;
+  }
+
+  function addToCart(itemId, name) {
+    const size = selections[itemId];
+
+    let itemPrice = 0;
+    for (let cat in MenuData) {
+      const found = MenuData[cat].find(i => i.id === itemId);
+      if (found) {
+        itemPrice = found[size];
+        break;
+      }
+    }
+
+    cart.push({ name, size: size === 'r' ? 'Regular' : 'Large', price: itemPrice });
+    updateCartStrip();
+    showToast(`Added ${name} to order`);
+  }
+
+  function updateCartStrip() {
+    const strip = document.getElementById('cart-strip');
+    const info = document.getElementById('cart-info');
+
+    if (cart.length > 0) {
+      strip.classList.add('visible');
+      const total = cart.reduce((sum, item) => sum + item.price, 0);
+      info.innerText = `${cart.length} Items | Rs. ${total}`;
+    }
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.innerText = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2000);
+  }
+
+  window.onload = init;
+
+
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+});
+
+
+document.onkeydown = function(e) {
+    if (e.keyCode == 123) { return false; } // F12 band
+    if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { return false; }
+    if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) { return false; }
+    if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) { return false; } 
+    if (e.ctrlKey && e.keyCode == 'C'.charCodeAt(0)) { return false; } 
+};
+
+
+
+
+
+
+  </script>
+
+
+
+  <footer class="main-footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h2 class="footer-logo"><span>CAFE</span></h2>
+            <p>Indulge in the finest selection of premium coffees, where every cup is a masterpiece. We blend traditional Arabic
+               hospitality with modern luxury to give you an unforgettable experience of taste and warmth.</p>
+            <div class="social-links">
+                <a href="#">Instagram</a>
+                <a href="#">Facebook</a>
+                <a href="#">WhatsApp</a>
+            </div>
+        </div>
+
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Our Menu</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h3>Contact Us</h3>
+            <p>📍 city</p>
+            <p>📞 032047896477</p>
+            <p>✉️ cafe@gmail.com</p>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        <p>&copy; 2026 Cafe | Designed </p>
+    </div>
+</footer>
+
+
+</body>
+
+
+
+
+
+<style>
+  :root {
+    --gold: #c5a059;
+    --gold-light: #e2c47a;
+    --dark-bg: #0a0a0a;
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --border: rgba(197, 160, 89, 0.2);
+    --text-gray: #a0a0a0;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: var(--dark-bg);
+    color: #fff;
+    font-family: 'Outfit', sans-serif;
+    overflow-x: hidden;
+  }
+
+
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #111;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--gold);
+    border-radius: 10px;
+  }
+
+
+.luxury-header {
+    background-color: #000000; 
+    padding: 80px 20px;
+    text-align: center;
+    border-bottom: 3px solid #d4af37; 
+    box-shadow : 0 4px 20px rgba(212, 175, 55, 0.2); 
+}
+
+.main-title {
+    color: #d4af37; 
+    font-size: 65pt; 
+    font-weight: 900;
+    letter-spacing: 18px; 
+    margin: 0 ;
+    text-transform: uppercase;
+    font-family: 'Playfair Display', serif; 
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.9);
+}
+
+.sub-title {
+    color: #ffffff;
+    font-size: 14pt;
+    letter-spacing: 12px;
+    margin-top: 10px;
+    text-transform: uppercase;
+    font-weight: 300;
+    opacity: 0.8;
+}
+
+.separator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.line {
+    height: 1px;
+    width: 120px;
+    background: linear-gradient(to right, transparent, #d4af37, transparent);
+}
+
+.symbol {
+    color: #d4af37;
+    margin: 0 20px;
+    font-size: 22pt;
+    filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.6));
+}
+
+
+  .tabs-container {
+    position: sticky;
+    top: 0;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+    border-bottom: 1px solid var(--border);
+    padding: 10px 0;
+  }
+
+  .tabs {
+    display: flex;
+    overflow-x: auto;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 5px 20px;
+    scrollbar-width: none;
+  }
+
+  .tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tab-btn {
+    background: none;
+    border: none;
+    color: var(--text-gray);
+    padding: 10px 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: 0.3s;
+    border-bottom: 2px solid transparent;
+  }
+
+  .tab-btn.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+  }
+
+
+  .container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+  }
+
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+  }
+
+
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+  }
+
+  .card:hover {
+    transform: translateY(-10px);
+    border-color: var(--gold);
+    box-shadow: 0 10px 30px rgba(197, 160, 89, 0.1);
+  }
+
+  .card-img-box {
+    width: 100%;
+    height: 200px;
+    background: #1a1a1a;
+    overflow: hidden;
+  }
+
+  .card-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s;
+  }
+
+  .card:hover .card-img-box img {
+    transform: scale(1.1);
+  }
+
+  .card-content {
+    padding: 20px;
+  }
+
+  .card-title {
+    font-family: 'Cinzel', serif;
+    color: var(--gold-light);
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+  }
+
+  .card-desc {
+    font-size: 0.85rem;
+    color: var(--text-gray);
+    margin-bottom: 15px;
+    line-height: 1.5;
+  }
+
+  .size-selector {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .size-btn {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: transparent;
+    color: #fff;
+    font-size: 0.7rem;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .size-btn.active {
+    background: var(--gold);
+    color: #000;
+    border-color: var(--gold);
+    font-weight: bold;
+  }
+
+  .size-btn.disabled {
+    opacity: 0.2;
+    cursor: not-allowed;
+  }
+
+  .price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .price {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .add-to-cart {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .add-to-cart:hover {
+    background: var(--gold);
+    color: #000;
+  }
+
+
+  #cart-strip {
+    position: fixed;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 500px;
+    background: var(--gold);
+    padding: 15px 25px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #000;
+    font-weight: bold;
+    z-index: 1000;
+    transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  }
+
+  #cart-strip.visible {
+    bottom: 30px;
+  }
+
+
+  #toast {
+    position: fixed;
+    top: 20px;
+    right: -300px;
+    background: var(--gold);
+    color: #000;
+    padding: 15px 25px;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: 0.5s;
+    z-index: 2000;
+  }
+
+  #toast.show {
+    right: 20px;
+  }
+
+  @media (max-width: 600px) {
+    header h1 {
+      font-size: 2.5rem;
+    }
+
+    .menu-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+
+
+  
+.main-footer {
+    background-color: #000000; 
+    color: #ffffff;
+    padding: 50px 0 20px 0;
+    font-family: 'Arial', sans-serif;
+    border-top: 2px solid #D4AF37; 
+    margin-top: 50px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 250px;
+    margin-bottom: 30px;
+}
+
+
+.footer-logo {
+    color: #D4AF37; 
+    font-size: 24pt;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+}
+
+.footer-logo span {
+    color: #ffffff;
+}
+
+.footer-section h3 {
+    color: #D4AF37; 
+    font-size: 14pt;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li a, .social-links a {
+    color: #cccccc;
+    text-decoration: none;
+    transition: 0.3s;
+    margin-left: 20px;
+}
+
+.footer-section ul li a:hover, .social-links a:hover {
+    color: #D4AF37; 
+    padding-left: 11px;
+}
+
+.social-links {
+    margin-top: 20px;
+}
+
+.social-links a {
+    margin-right: 15px;
+    border: 1px solid #D4AF37;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 10pt;
+}
+
+
+.footer-bottom {
+    text-align: center;
+    border-top: 1px solid #333;
+    margin-top: 30px;
+    padding-top: 20px;
+    font-size: 10pt;
+    color: #777;
+}
+
+
+body {
+    -webkit-user-select: none; 
+    -moz-user-select: none;    
+    -ms-user-select: none;     
+    user-select: none;         
+}
+
+
+
+
+
+
+
+
+
+
+
+
+</style>
+
+<body>

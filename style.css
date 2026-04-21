@@ -1,0 +1,308 @@
+:root {
+    --gold: #c5a059;
+    --gold-light: #e2c47a;
+    --dark: #080808;
+    --glass: rgba(255, 255, 255, 0.03);
+    --border: rgba(197, 160, 89, 0.18);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--dark);
+    color: #fff;
+    font-family: 'Outfit', sans-serif;
+    overflow-x: hidden;
+}
+
+/* PARTICLES */
+#particles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0;
+    animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+    0% {
+        opacity: 0;
+        transform: translateY(100vh) scale(0);
+    }
+
+    10% {
+        opacity: .35;
+    }
+
+    90% {
+        opacity: .05;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-10vh) scale(1.5);
+    }
+}
+
+/* SPLASH */
+#splash {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: transform 1.6s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.splash-ring {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 1px solid rgba(197, 160, 89, 0.25);
+    position: absolute;
+    animation: ringPulse 2.4s ease-in-out infinite;
+}
+
+.splash-logo {
+    font-family: 'Cinzel', serif;
+    font-size: 3.4rem;
+    color: var(--gold);
+    letter-spacing: 14px;
+    text-transform: uppercase;
+}
+
+.splash-line {
+    width: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    margin: 16px auto;
+    animation: lineGrow 1s .5s ease forwards;
+}
+
+@keyframes lineGrow {
+    to {
+        width: 160px;
+    }
+}
+
+/* HEADER */
+header {
+    padding: 80px 20px 60px;
+    text-align: center;
+    position: relative;
+    background: radial-gradient(ellipse 80% 55% at 50% 0%, #1a1100, #080808);
+    border-bottom: 1px solid var(--border);
+}
+
+.header-bg-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Cinzel', serif;
+    font-size: 11rem;
+    font-weight: 700;
+    color: rgba(197, 160, 89, 0.025);
+    letter-spacing: 20px;
+}
+
+header h1 {
+    font-family: 'Cinzel', serif;
+    color: var(--gold);
+    font-size: 2.7rem;
+    letter-spacing: 8px;
+}
+
+/* TABS */
+.tabs-wrapper {
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    background: rgba(8, 8, 8, .97);
+    backdrop-filter: blur(24px);
+    border-bottom: 1px solid var(--border);
+}
+
+.tabs {
+    display: flex;
+    overflow-x: auto;
+    max-width: 1300px;
+    margin: 0 auto;
+    scrollbar-width: none;
+}
+
+.tab {
+    padding: 15px 17px;
+    font-size: .7rem;
+    font-weight: 600;
+    color: #555;
+    text-transform: uppercase;
+    cursor: pointer;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    transition: .3s;
+    white-space: nowrap;
+}
+
+.tab.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+}
+
+/* CARD SYSTEM */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    padding: 20px;
+}
+
+.card {
+    background: var(--glass);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(12px);
+    transition: 0.3s;
+}
+
+.card:hover {
+    border-color: var(--gold);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(197, 160, 89, 0.1);
+}
+
+/* IMAGE & DESC STYLES */
+.card-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    border: 1px solid var(--border);
+}
+
+.card-name {
+    font-family: 'Cinzel', serif;
+    color: var(--gold-light);
+    font-size: 1rem;
+    margin-bottom: 8px;
+}
+
+.card-desc {
+    font-size: 0.78rem;
+    color: #888;
+    line-height: 1.5;
+    margin-bottom: 18px;
+    min-height: 35px;
+}
+
+.size-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+
+.sz {
+    flex: 1;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 8px;
+    text-align: center;
+    cursor: pointer;
+    font-size: .7rem;
+    transition: .25s;
+    color: #666;
+}
+
+.sz.on {
+    background: rgba(197, 160, 89, 0.15);
+    border-color: var(--gold);
+    color: var(--gold);
+}
+
+.sz.na {
+    opacity: .2;
+    cursor: not-allowed;
+}
+
+.add-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.add-btn {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 8px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.add-btn:hover {
+    background: var(--gold);
+    color: #000;
+}
+
+/* CART & SCREENS (Copied from your original logic) */
+#cart-strip {
+    position: fixed;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 500px;
+    background: var(--gold);
+    color: #000;
+    padding: 15px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 500;
+    transition: 0.5s;
+}
+
+.strip-active {
+    bottom: 20px !important;
+}
+
+#cart-panel {
+    position: fixed;
+    right: -400px;
+    top: 0;
+    width: 380px;
+    height: 100%;
+    background: #0d0d0d;
+    z-index: 600;
+    transition: 0.4s;
+    border-left: 1px solid var(--border);
+}
+
+.cp-open {
+    right: 0 !important;
+}
